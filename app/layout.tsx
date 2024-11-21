@@ -10,8 +10,8 @@ const vazir = localFont({
 });
 
 export const metadata: Metadata = {
-  title: `${process.env.NEXt_PUBLIC_APP}`,
-  description: `${process.env.NEXt_PUBLIC_APP} application`,
+  title: `${process.env.NEXT_PUBLIC_APP}`,
+  description: `${process.env.NEXT_PUBLIC_APP} application`,
 };
 
 export default function RootLayout({
@@ -22,11 +22,12 @@ export default function RootLayout({
   return (
     <html dir='rtl' lang='fa' suppressHydrationWarning>
       <body className={vazir.className}>
-      <ThemeProvider
+        <ThemeProvider
           attribute='class'
           defaultTheme='system'
           enableSystem
-          disableTransitionOnChange>
+          disableTransitionOnChange
+        >
           {children}
         </ThemeProvider>
       </body>
