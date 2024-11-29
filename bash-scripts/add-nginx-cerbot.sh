@@ -26,8 +26,20 @@ if [ ! -f /etc/letsencrypt/ssl-dhparams.pem ]; then
   sudo openssl dhparam -out /etc/letsencrypt/ssl-dhparams.pem 2048
 fi
 
-# Create Nginx config with reverse proxy, SSL support, rate limiting, and streaming support
+# Adjust permissions for the live directory and the archived certificates
+sudo chown -R root:www-data /etc/letsencrypt/live/$DOMAIN_NAME /etc/letsencrypt/archive/$DOMAIN_NAME
+sudo chmod 750 /etc/letsencrypt/live
+sudo chmod 750 /etc/letsencrypt/archive
+sudo chmod 640 /etc/letsencrypt/live/$DOMAIN_NAME/*
+sudo chmod 640 /etc/letsencrypt/archive/$DOMAIN_NAME/*
 
+# Make sure parent directories are accessible
+sudo chmod 755 /etc/letsencrypt
+sudo chmod 755 /etc/letsencrypt/live
+sudo chmod 755 /etc/letsencrypt/archive
+
+
+# Create Nginx config with reverse proxy, SSL support, rate limiting, and streaming support
 sudo bash -c "cat > /etc/nginx/sites-available/myapp <<'EOL'
 limit_req_zone \$binary_remote_addr zone=mylimit:10m rate=10r/s;
 
