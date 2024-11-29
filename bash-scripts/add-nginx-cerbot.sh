@@ -3,9 +3,6 @@
 DOMAIN_NAME="ju.rahem.dev"
 EMAIL="reza.rahem224@gmail.com" 
 
-# Update the packages
-sudo apt update && sudo apt upgrade -y
-
 # Install Nginx
 sudo apt install nginx -y
 
