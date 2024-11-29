@@ -27,15 +27,15 @@ if [ ! -f /etc/letsencrypt/ssl-dhparams.pem ]; then
 fi
 
 # Create Nginx config with reverse proxy, SSL support, rate limiting, and streaming support
-sudo bash -c "cat > /etc/nginx/sites-available/myapp <<EOL
-limit_req_zone $binary_remote_addr zone=mylimit:10m rate=10r/s;
+sudo -s cat > /etc/nginx/sites-available/myapp <<EOL
+limit_req_zone \$binary_remote_addr zone=mylimit:10m rate=10r/s;
 
 server {
     listen 80;
     server_name $DOMAIN_NAME;
 
     # Redirect all HTTP requests to HTTPS
-    return 301 https://$host$request_uri;
+    return 301 https://\$host\$request_uri;
 }
 
 server {
@@ -53,18 +53,17 @@ server {
     location / {
         proxy_pass http://localhost:3000;
         proxy_http_version 1.1;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection "upgrade";
-        proxy_set_header Host $host;
-        proxy_cache_bypass $http_upgrade;
-        
+        proxy_set_header Upgrade \$http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host \$host;
+        proxy_cache_bypass \$http_upgrade;
+
         # Disable buffering for streaming support
         proxy_buffering off;
         proxy_set_header X-Accel-Buffering no;
     }
 }
-EOL"
-
+EOL
 
 # Create symbolic link if it doesn't already exist
 sudo ln -s /etc/nginx/sites-available/myapp /etc/nginx/sites-enabled/myapp
