@@ -15,6 +15,13 @@ for file_url in "https://raw.githubusercontent.com/rezarahem/jupiter-core/refs/h
     
     # Now download the file and replace the line with the checkmark
     curl -s -o ~/$(basename $file_url) "$file_url" && echo -e "\r$(printf '%.0s ' {1..50})\r✔  $(basename $file_url)"
+
+     # Make setup.sh executable
+    if [ "$(basename $file_url)" == "setup.sh" ]; then
+        chmod +x ~/setup.sh
+        echo "Made setup.sh executable"
+    fi
+
 done; 
 echo "Done!"
 ```
