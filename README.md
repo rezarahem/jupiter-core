@@ -1,6 +1,6 @@
 ## Setup the VPS
 
-This guide assumes you are using the root user. If setting up the VPS with a non-root user, you should grant the appropriate permissions to that user.
+This guide assumes you are using the root user. Provided you are using a non-root user, you should grant the appropriate permissions to that user.
 
 ### Prerequisites
 
