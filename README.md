@@ -163,7 +163,3 @@ This guide is written with the assumption that you're using the root user. If yo
      ```bash
      ./setpu.sh
      ```
-
-7. ```bash
-   rm docker.sh deploy.sh setup.sh nginx.sh setup.sh
-   ```
