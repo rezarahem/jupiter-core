@@ -9,5 +9,6 @@
 # ./docker.sh
 # ./nginx.sh
 
-cool
+echo "cool"
+
 
