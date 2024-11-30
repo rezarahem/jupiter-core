@@ -1,7 +1,3 @@
-
-
-***
-
 ## Setup the VPS
 
 1. **Download the scripts**
