@@ -4,7 +4,7 @@ for file_url in "https://raw.githubusercontent.com/rezarahem/jupiter-core/refs/h
     echo -n "Downloading $(basename $file_url)"
     
     # Animate a spinner
-    spinner="/-\|"
+    spinner="/-\|/-\|"
     while true; do
         for i in {0..3}; do
             echo -ne "\rDownloading $(basename $file_url) ${spinner:$i:1}"
