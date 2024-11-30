@@ -9,3 +9,5 @@ chmod +x deploy.sh
 ./docker.sh
 ./nginx.sh
 
+echo 'You're all set up! 👌'
+
