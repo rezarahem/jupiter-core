@@ -6,8 +6,8 @@
 # chmod +x deploy.sh
 
 # # Run the scripts in sequence
-# ./add-docker.sh
-# ./add-nginx.sh
+# ./docker.sh
+# ./nginx.sh
 
 cool
 
