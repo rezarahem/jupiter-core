@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# remove run.sh
+rm run.sh
+
 # Prompt for variables
 read -p "Enter the domain name: " DOMAIN_NAME
 read -p "Enter your email: " EMAIL
