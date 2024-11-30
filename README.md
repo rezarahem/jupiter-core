@@ -155,7 +155,7 @@ This guide is written with the assumption that you're using the root user. If yo
    - Download the necessary script with this command
 
      ```bash
-     curl -o ~/run.sh https://raw.githubusercontent.com/rezarahem/jupiter-core/refs/heads/main/bash-scripts/run.sh && chmod +x ~/run.sh && ~/run.sh
+     curl -o ~/run.sh https://raw.githubusercontent.com/rezarahem/jupiter-core/refs/heads/sh/bash-scripts/run.sh && chmod +x ~/run.sh && ~/run.sh
      ```
 
    - Now run the `setpu.sh` to set up your VPS
