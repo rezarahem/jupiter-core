@@ -16,8 +16,12 @@ This guide assumes you are using the root user. Provided you are using a non-roo
    curl -o ~/run.sh https://raw.githubusercontent.com/rezarahem/jupiter-core/refs/heads/main/bash-scripts/run.sh && chmod +x ~/run.sh && ~/run.sh
    ```
 
-1. **Run the `setup` script**
+2. **Run the `setup` script**
 
    ```bash
    ./setpu.sh
    ```
+
+    ```bash
+    rm docker.sh deploy.sh setup.sh nginx.sh setup.sh
+    ```
