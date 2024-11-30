@@ -1,5 +1,15 @@
 ## Setup the VPS
 
+### Prerequisites
+
+1. Purchase a domain name
+2. Purchase a Linux Ubuntu server
+3. Create an `A` DNS record pointing to your server IPv4 address
+
+
+This guide assumes you are using the root user. If setting up the VPS with a non-root user, you should grant the appropriate permissions to that user.
+
+
 1. **Download the scripts**
 
     ```bash
