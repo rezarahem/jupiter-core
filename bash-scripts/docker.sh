@@ -1,6 +1,8 @@
 #!/bin/bash
 
-for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do sudo apt-get remove $pkg; done
+for pkg in docker.io docker-doc docker-compose docker-compose-v2 podman-docker containerd runc; do 
+  sudo apt-get remove -y "$pkg" 
+done
 
 sudo apt update
 sudo apt install -y ca-certificates curl
