@@ -1,7 +1,14 @@
 #!/bin/bash
 
-DOMAIN_NAME="ju.rahem.dev"
-EMAIL="reza.rahem224@gmail.com" 
+DOMAIN_NAME=$1
+EMAIL=$2 
+
+
+if [[ -z "$DOMAIN_NAME" || -z "$EMAIL" ]]; then
+  echo "Error: Missing domain or email."
+  echo "Usage: ./nginx.sh <domain_name> <email>"
+  exit 1
+fi
 
 # Install Nginx
 sudo apt install nginx -y
