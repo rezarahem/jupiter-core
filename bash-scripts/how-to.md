@@ -13,7 +13,7 @@ for file_url in "https://raw.githubusercontent.com/rezarahem/jupiter-core/refs/h
     done
     
     # Now download the file and replace the line with the checkmark
-    curl -s -o ~/$(basename $file_url) "$file_url" && echo -e "\r$(printf '%.0s ' {1..50})\r✔   $(basename $file_url)"
+    curl -s -o ~/$(basename $file_url) "$file_url" && echo -e "\r$(printf '%.0s ' {1..50})\r✔ $(basename $file_url)"
 done; 
 echo "Done!"
 ```
