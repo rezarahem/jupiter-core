@@ -8,11 +8,13 @@ While Jupiter is still under development, its vision is clear: to empower develo
 
 ## Clone the source code
 
-For stating a new Jupiter project I prepared a CLI to clone the porject.
+<span style="color: yellow;">NOTE</span> You need to have [git](https://git-scm.com/downloads) installed for the cli to work.
+
+For starting a new Jupiter project I prepared a CLI to clone the project.
 
 **Start the CLI**
 
-Right now this cli just get your `App Title` and clone `jupiter-core` repo
+Right now this cli just gets your `App Title` and clone `jupiter-core` repo
 
 ```
 npx @rahem/jupiter
@@ -54,7 +56,7 @@ This guide is written with the assumption that you're using the root user. If yo
    ssh-keygen -t ed25519 -C "your_email@example.com"
    ```
 
-   <span style="color: yellow;">NOTE</span> Consider the public key has a `.pub` extension. You can safely share this key, but never ever expose you private key.
+   <span style="color: yellow;">NOTE</span> Consider the public key has a `.pub` extension. You can safely share this key, but never ever expose your private key.
 
    Read your ssh public key with this command, then get a copy of it.
 
@@ -78,11 +80,13 @@ This guide is written with the assumption that you're using the root user. If yo
 
    This command opens a file called `authorized_keys` in a text editor.
 
-   Add the public ssh key to `authorized_keys` with nano text editer. Then save the file with `ctrl+x` followed by `Y` and finally `enter`.
+   Add the public ssh key to `authorized_keys` with nano text editor. Then save the file with `ctrl+x` followed by `Y` and finally `enter`.
 
-   Now you ssh key is ready. next time you login, you don't need to enter you password.
+   Now your ssh key is ready. next time you log in, you don't need to enter your password.
 
 4. **Disable Login with Password (Optional)**
+
+   ...
 
 5. **Setup CI/CD With Github Action**
 
@@ -98,7 +102,7 @@ This guide is written with the assumption that you're using the root user. If yo
      cat ~/.ssh/id_ed25519.pub
      ```
 
-     Copy the public key and go to you github.
+     Copy the public key and go to your github.
      On your github, go to settings and under the SSH and GPG keys click on New SSH Key and add the key.
 
      then on your VPS you can test the connection with this command.
@@ -121,7 +125,7 @@ This guide is written with the assumption that you're using the root user. If yo
 
      Now on the repository you want CI/CD, go to the Settings under Deploy Keys add the new public key you generated
 
-     You can read the key whit this command
+     You can read the key with this command
 
      ```bash
      cat .ssh/deploy_key.pub
@@ -169,7 +173,7 @@ This guide is written with the assumption that you're using the root user. If yo
                  ssh username@you_vps_ip "~/deploy.sh"
      ```
 
-     With these steps whenever pushed to your repos main brach. Your VPS automaticlly gets updated.
+     With these steps whenever pushed to your repos main branch. Your VPS automatically gets updated.
      This action need a bash file to be present on the VPS to work. We add in the next step.
 
 6. **Download the scripts**
@@ -180,8 +184,8 @@ This guide is written with the assumption that you're using the root user. If yo
      curl -o ~/run.sh https://raw.githubusercontent.com/rezarahem/jupiter-core/refs/heads/sh/run.sh && chmod +x ~/run.sh && ~/run.sh
      ```
 
-   - Now run the `setpu.sh` to set up your VPS
+   - Now run the `setup.sh` to set up your VPS
 
      ```bash
-     ./setpu.sh
+     ./setupf.sh
      ```
