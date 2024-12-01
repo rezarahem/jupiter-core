@@ -1,3 +1,25 @@
+# Jupiter
+
+Jupiter is a work-in-progress repository designed to simplify the process of building, deploying, and managing modern web applications. Built on top of Next.js and a carefully selected stack of powerful libraries, Jupiter provides a solid foundation for developers looking to kickstart their projects with essential features like authentication, database integration, and more.
+
+Jupiter doesn’t just focus on development—it streamlines deployment and automation too. With tools like a CLI to quickly set up the source code and pre-configured bash scripts for configuring your VPS, Jupiter ensures that getting your application live is as effortless as possible. Additionally, Jupiter supports automated deployment workflows, making it easy to keep your application updated with CI/CD pipelines.
+
+While Jupiter is still under development, its vision is clear: to empower developers with an efficient and scalable way to build, deploy, and manage web applications. Stay tuned as we continue to enhance its capabilities!
+
+## Clone the source code
+
+For stating a new Jupiter project I prepared a CLI to clone the porject.
+
+**Start the CLI**
+
+Right now this cli just get your `App Title` and clone `jupiter-core` repo
+
+```
+npx @rahem/jupiter
+```
+
+Simply input your app name, or use a `.` to clone the repo into the current directory. This provides a quick way to get started with your project, and I’ll be continuously improving the CLI to include more setup options and automation features to streamline the development process.
+
 ## Setup the VPS
 
 This guide is written with the assumption that you're using the root user. If you're working with a non-root user, ensure the appropriate permissions are granted.
