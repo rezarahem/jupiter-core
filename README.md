@@ -57,7 +57,7 @@ For starting a new Jupiter project I prepared a CLI to clone the project.
         If Git is not initialized, you’ll see an option to `Initialize Repository`. Click it.\
         This will create a `.git` folder and initialize the repository. (We actually did this in the previous step, so you can skip this step. Still, it's good to know.)
 
-     3. Add the First Commit
+     3. Add the First Commit (if you skip last step)
 
         In the Source Control panel, stage your changes by clicking the + icon next to the file names or the Stage All Changes button.\
         In the message box at the top, type a commit message, such as `init`.\
@@ -182,7 +182,7 @@ In this guide, we use the latter approach of creating and using a specific SSH k
    It's a good practice to choose a meaningful name for this pair like `deploy`
 
    ```bash
-   ssh-keygen -t ed25519 -C "deploy"
+    ssh-keygen -t ed25519 -C "your_email@example.com" -f ".shh/deploy"
    ```
 
    Log the public key
@@ -200,7 +200,7 @@ In this guide, we use the latter approach of creating and using a specific SSH k
    Now log the private key with this command.
 
    ```bash
-   cat .ssh/deploy_key
+   cat .ssh/deploy
    ```
 
    Copy it and go back to your repository settings page, under Secrets and Variables go to Actions and add the private key with `DEPLOY_SSH_KEY` as name or any name you want.
