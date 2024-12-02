@@ -53,7 +53,8 @@ For starting a new Jupiter project I prepared a CLI to clone the project.
 
       2. Initialize Git 
 
-         If Git is not initialized, you’ll see an option to `Initialize Repository` Click it. This will create a `.git` folder and initialize the repository. (We actually did this in the previous step, so you can skip this step. Still, it's good to know.)
+         If Git is not initialized, you’ll see an option to `Initialize Repository`. Click it.\
+         This will create a `.git` folder and initialize the repository. (We actually did this in the previous step, so you can skip this step. Still, it's good to know.)
 
       3. Sign in to GitHub
 
@@ -94,7 +95,6 @@ For starting a new Jupiter project I prepared a CLI to clone the project.
 
 This guide is written with the assumption that you're using the root user. If you're working with a non-root user, ensure the appropriate permissions are granted.
 
-### Setup
 
 1. **Login to your VPS with root user**
 
