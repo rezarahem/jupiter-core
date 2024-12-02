@@ -254,5 +254,5 @@ This guide is written with the assumption that you're using the root user. If yo
    - Now run the `setup.sh` to set up your VPS
 
      ```bash
-     ./setupf.sh
+     ./setup.sh
      ```
