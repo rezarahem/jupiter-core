@@ -153,97 +153,7 @@ This guide is written with the assumption that you're using the root user. If yo
 
 4. **Disable Login with Password (Optional)**
 
-   ...
-
-5. **Setup CI/CD With Github Action**
-
-   - First generate a SSH key on you VPS for connection to your github account
-
-     ```bash
-     ssh-keygen -t ed25519 -C "your-email@example.com"
-     ```
-
-     Log the public key
-
-     ```bash
-     cat ~/.ssh/id_ed25519.pub
-     ```
-
-     Copy the public key and go to your github.
-     On your github, go to settings and under the SSH and GPG keys click on New SSH Key and add the key.
-
-     then on your VPS you can test the connection with this command.
-
-     ```bash
-     ssh -T git@github.com
-     ```
-
-     If successful, you would see a log like this.
-
-     `Hi username! You've successfully authenticated, but GitHub does not provide shell access.`
-
-   - Second use github Secrets for automations
-
-     generate another pair of ssh keys, consider to name this pair meaningful like `deploy` or whatever you want.
-
-     ```bash
-     ssh-keygen -t ed25519 -C "deploy" -f ~/.ssh/deploy_key
-     ```
-
-     Now on the repository you want CI/CD, go to the Settings under Deploy Keys add the new public key you generated
-
-     You can read the key with this command
-
-     ```bash
-     cat .ssh/deploy_key.pub
-     ```
-
-     Now go to your repository settings page, under Secrets and Variables go to Actions and add the private key with `DEPLOY_SSH_KEY` as name or any name you want.
-
-     Read the private key like this
-
-     ```bash
-     cat .ssh/deploy_key
-     ```
-
-   - Finally in your repo make a directory like this `/.github/workflows`. inside the workflows make a yml file. Name it whatever you want.
-
-     `deploy.yml`
-
-     ```
-     name: Deploy to VPS
-
-     on:
-     push:
-         branches:
-             - main
-
-     jobs:
-     deploy:
-         runs-on: your_linux_version
-         steps:
-             - name: Checkout code
-             uses: actions/checkout@v3
-             with:
-                 fetch-depth: 0
-
-             - name: Set up SSH
-             run: |
-                 mkdir -p ~/.ssh
-                 echo "${{ secrets.DEPLOY_SSH_KEY }}" > ~/.ssh/id_ed25519
-                 chmod 600 ~/.ssh/id_ed25519
-                 ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
-                 ssh-keyscan you_vps_ip >> ~/.ssh/known_hosts
-
-             - name: Run deploy script on VPS
-             run: |
-                 ssh username@you_vps_ip "~/deploy.sh"
-     ```
-
-     With these steps whenever pushed to your repos main branch. Your VPS automatically gets updated.
-     This action need a bash file to be present on the VPS to work. We add in the next step.
-
-6. **Download the scripts**
+5. **Download the scripts**
 
    - Download the necessary script with this command
 
@@ -256,3 +166,80 @@ This guide is written with the assumption that you're using the root user. If yo
      ```bash
      ./setup.sh
      ```
+
+## Setup CI/CD With Github Action
+
+GitHub Actions is a powerful CI/CD tool integrated into GitHub, enabling automated workflows for building, testing, and deploying applications. CI (Continuous Integration) ensures code changes are tested and validated automatically, while CD (Continuous Deployment) handles automated deployments to environments like production. Workflows are defined in `YAML` files under `.github/workflows`, triggered by events like `push` or `pull_request`. A typical workflow involves steps for checking out code, setting up the environment, installing dependencies, running tests, building, and deploying. Sensitive data like API keys can be securely stored as GitHub Secrets. For example, a Next.js deployment workflow might install dependencies, build the app, and deploy to production. GitHub Actions offers flexibility, reusable actions, making it ideal for automating modern development pipelines.
+
+When setting up SSH access between your VPS and GitHub, it's important to note that you only need one SSH key pair (a public key and a private key) for each VPS. This single key pair is sufficient to authenticate the VPS with your GitHub account and can be used for all repositories associated with that account.
+
+However, if you prefer more granular control, you can create and use a specific SSH key pair for a particular repository rather than for the entire GitHub account. This allows you to manage CI/CD processes for all repositories using one key pair or assign different keys for specific repositories as needed.
+
+In this guide, we use the latter approach of creating and using a specific SSH key pair for a particular repository.
+
+1. **Generate a SSH Key Pair**
+
+   It's a good practice to choose a meaningful name for this pair like `deploy`
+
+   ```bash
+   ssh-keygen -t ed25519 -C "deploy"
+   ```
+
+   Log the public key
+
+   ```bash
+   cat ~/.ssh/deploy.pub
+   ```
+
+   Copy the public key and go to your github.
+
+   On your github repo, go to settings and under `Deploy keys` add the new public key you generated.
+
+2. **Add Github Secret**
+
+   Now log the private key with this command.
+
+   ```bash
+   cat .ssh/deploy_key
+   ```
+
+   Copy it and go back to your repository settings page, under Secrets and Variables go to Actions and add the private key with `DEPLOY_SSH_KEY` as name or any name you want.
+
+3. **Add Github Action Workflow to the Source Code**
+
+   Finally in your repo make a directory like this `/.github/workflows`. inside the workflows make a yml file. Name it whatever you want.
+
+   `deploy.yml`
+
+   ```
+   name: Deploy to VPS
+
+   on:
+   push:
+      branches:
+         - main
+
+   jobs:
+   deploy:
+      runs-on: your_linux_version
+      steps:
+      - name: Checkout code
+         uses: actions/checkout@v3
+         with:
+               fetch-depth: 0
+
+      - name: Set up SSH
+         run: |
+               mkdir -p ~/.ssh
+               echo "${{ secrets.DEPLOY_SSH_KEY }}" > ~/.ssh/id_ed25519
+               chmod 600 ~/.ssh/id_ed25519
+               ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
+               ssh-keyscan you_vps_ip >> ~/.ssh/known_hosts
+
+      - name: Run deploy script on VPS
+         run: |
+               ssh username@you_vps_ip "~/deploy.sh"
+   ```
+
+With these steps whenever pushed to your repos main branch. Your VPS automatically gets updated.
+This action need a bash file to be present on the VPS to work. this bash file got generated on you VPS when you run the ./setup script
