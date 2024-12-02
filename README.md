@@ -40,61 +40,66 @@ For starting a new Jupiter project I prepared a CLI to clone the project.
 
    ```bash
    git commit -m "Init"
-   ``` 
-3. **Publish Your Repo on Github** 
+   ```
 
-   There are two ways to publish your repository: either automatically through `VS Code's Source Control` or manually. 
+3. **Publish Your Repo on Github**
+
+   There are two ways to publish your repository: either automatically through `VS Code's Source Control` or manually.
 
    - **Method 1: Automatically Publish Through VS Code's Source Control (Recommended)**
 
-      1. Open Source Control
+     1. Open Source Control
 
-         Click on the Source Control icon in the Activity Bar or press `Ctrl + Shift + G`
+        Click on the Source Control icon in the Activity Bar or press `Ctrl + Shift + G`
 
-      2. Initialize Git 
+     2. Initialize Git
 
-         If Git is not initialized, you’ll see an option to `Initialize Repository`. Click it.\
-         This will create a `.git` folder and initialize the repository. (We actually did this in the previous step, so you can skip this step. Still, it's good to know.)
+        If Git is not initialized, you’ll see an option to `Initialize Repository`. Click it.\
+        This will create a `.git` folder and initialize the repository. (We actually did this in the previous step, so you can skip this step. Still, it's good to know.)
 
-      3. Sign in to GitHub
+     3. Add the First Commit
 
-         If prompted, sign in to your GitHub account. You may need to authorize VS Code to access GitHub.
-      
-      4. Publish Repository
+        In the Source Control panel, stage your changes by clicking the + icon next to the file names or the Stage All Changes button.\
+        In the message box at the top, type a commit message, such as `init`.\
+        Click the ✔ Commit button or press `Ctrl + Enter` to commit the changes.
 
-         Click the Publish Repository button in the Source Control panel.\
-         Select GitHub as the provider.\
-         Choose whether to make the repository public or private.
+     4. Sign in to GitHub
 
-      5. Confirm and Publish
+        If prompted, sign in to your GitHub account. You may need to authorize VS Code to access GitHub.
 
-         VS Code will create a new repository on GitHub and push your local changes automatically. Once done, a notification will confirm the repository has been published, and you can view it on GitHub.
+     5. Publish Repository
 
+        Click the Publish Repository button in the Source Control panel.\
+        Select GitHub as the provider.\
+        Choose whether to make the repository public or private.
+
+     6. Confirm and Publish
+
+        VS Code will create a new repository on GitHub and push your local changes automatically. Once done, a notification will confirm the repository has been published, and you can view it on GitHub.
 
    - **Method 2: Manually Create a Repository on Github**
 
-      1. Create a Repository on GitHub
+     1. Create a Repository on GitHub
 
-         Go to GitHub and create a new repository.\
-         Copy the repository URL (HTTPS or SSH).
+        Go to GitHub and create a new repository.\
+        Copy the repository URL (HTTPS or SSH).
 
-      2. Link Local Repository to GitHub 
+     2. Link Local Repository to GitHub
 
-         ```bash
-         git remote add origin <repository-url>
-         ```
+        ```bash
+        git remote add origin <repository-url>
+        ```
 
-      3. Push your code to GitHub 
+     3. Push your code to GitHub
 
-         ```bash
-         git branch -M main
-         git push -u origin main
-         ```
+        ```bash
+        git branch -M main
+        git push -u origin main
+        ```
 
 ## Setup the VPS
 
 This guide is written with the assumption that you're using the root user. If you're working with a non-root user, ensure the appropriate permissions are granted.
-
 
 1. **Login to your VPS with root user**
 
