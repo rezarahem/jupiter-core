@@ -20,7 +20,7 @@ For starting a new Jupiter project I prepared a CLI to clone the project.
    npx @rahem/jupiter
    ```
 
-   Provide a name to create a new folder and clone the repository inside it. Use `.` to clone into the current directory.. This provides a quick way to get started with your project, and I’ll be continuously improving the CLI to include more setup options and automation features to streamline the development process.
+   Provide a name to create a new folder and clone the repository inside it. Use `.` to clone into the current directory. This provides a quick way to get started with your project, and I’ll be continuously improving the CLI to include more setup options and automation features to streamline the development process.
 
 2. **Initialize a Git Repository**
 
