@@ -8,19 +8,19 @@ While Jupiter is still under development, its vision is clear: to empower develo
 
 ## Clone the Source Code
 
-<span style="color: yellow;">NOTE</span> You need to have [git](https://git-scm.com/downloads) installed for the cli to work.
+<span style="color: yellow;">NOTE</span> You need to have [Git](https://git-scm.com/downloads) installed for the CLI to work.
 
-For starting a new Jupiter project I prepared a CLI to clone the project.
+To start a new Jupiter project I prepared a CLI to clone the project.
 
 1. **Start the CLI**
 
-   Right now this cli just gets your `App Title` and clone `jupiter-core` repo
+   Right now, this CLI just gets your `App Title` and clones `jupiter-core` repo
 
    ```
    npx @rahem/jupiter
    ```
 
-   Provide a name to create a new folder and clone the repository inside it. Use `.` to clone into the current directory. This provides a quick way to get started with your project, and I’ll be continuously improving the CLI to include more setup options and automation features to streamline the development process.
+   Provide a name to create a new folder and clone the repository inside it. Use `.` to clone into the current directory. This provides a quick way to get started with your project, and I will continuously improving the CLI to include more setup options and automation features, further streamlining the development process.
 
 2. **Initialize a Git Repository**
 
@@ -115,9 +115,9 @@ This guide is written with the assumption that you're using the root user. If yo
 
 3. **Login with SSH key**
 
-   First you need to generate a `SSH key`.
+   First, you need to generate a `SSH key`.
 
-   <span style="color: yellow;">NOTE</span> You should generate your public/private ssh key pair on your local machine
+   <span style="color: yellow;">NOTE</span> You should generate your public/private SSH key pair on your local machine
 
    ```bash
    ssh-keygen -t ed25519 -C "your_email@example.com"
@@ -147,15 +147,15 @@ This guide is written with the assumption that you're using the root user. If yo
 
    This command opens a file called `authorized_keys` in a text editor.
 
-   Add the public ssh key to `authorized_keys` with nano text editor. Then save the file with `ctrl+x` followed by `Y` and finally `enter`.
+   Add the public SSH key to `authorized_keys` using the nano text editor. Then save the file with `ctrl+x` followed by `Y` and finally `enter`.
 
-   Now your ssh key is ready. next time you log in, you don't need to enter your password.
+   Now your SSH key is ready. next time you log in, you won't need to enter your password.
 
 4. **Disable Login with Password (Optional)**
 
 5. **Download the scripts**
 
-   - Download the necessary script with this command
+   - Download the necessary script using the following command
 
      ```bash
      curl -o ~/run.sh https://raw.githubusercontent.com/rezarahem/jupiter-core/refs/heads/sh/run.sh && chmod +x ~/run.sh && ~/run.sh
