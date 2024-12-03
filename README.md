@@ -214,7 +214,7 @@ In this guide, we use the latter approach of creating and using a specific SSH k
    Here, we aim to automate the deployment process. To achieve this, I added a command to the Jupiter CLI called deploy-workflow. You can also use the shorthand alias dw to quickly add a deployment workflow action to your project.
 
    ```bash
-   ju dw <secret>
+   npx @rahem/jupiter dw <secret>
    ```
 
    Replace `<secret>` with your SSH secret key configured in the previous step.
