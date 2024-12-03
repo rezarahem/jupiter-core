@@ -207,39 +207,18 @@ In this guide, we use the latter approach of creating and using a specific SSH k
 
 3. **Add Github Action Workflow to the Source Code**
 
-   Finally in your repo make a directory like this `/.github/workflows`. inside the workflows make a yml file. Name it whatever you want.
+   GitHub Actions is a powerful tool for automating tasks within your software development lifecycle. It enables you to define custom workflows for CI/CD (Continuous Integration/Continuous Deployment), automated testing, code quality checks, and other processes.
 
-   `deploy.yml`
+   To make GitHub Actions work, you need to add `a workflow file` to your project. Workflow files are written in `YAML` and stored in the `.github/workflows/` directory at the root of your repository.
 
-   ```
-   name: Deploy to VPS
+   Here, we aim to automate the deployment process. To achieve this, I added a command to the Jupiter CLI called deploy-workflow. You can also use the shorthand alias dw to quickly add a deployment workflow action to your project.
 
-   on:
-   push:
-      branches:
-         - main
-
-   jobs:
-   deploy:
-      runs-on: your_linux_version
-      steps:
-      - name: Checkout code
-         uses: actions/checkout@v3
-         with:
-               fetch-depth: 0
-
-      - name: Set up SSH
-         run: |
-               mkdir -p ~/.ssh
-               echo "${{ secrets.DEPLOY_SSH_KEY }}" > ~/.ssh/id_ed25519
-               chmod 600 ~/.ssh/id_ed25519
-               ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
-               ssh-keyscan you_vps_ip >> ~/.ssh/known_hosts
-
-      - name: Run deploy script on VPS
-         run: |
-               ssh username@you_vps_ip "~/deploy.sh"
+   ```bash
+   ju dw <secret>
    ```
 
-With these steps whenever pushed to your repos main branch. Your VPS automatically gets updated.
-This action need a bash file to be present on the VPS to work. this bash file got generated on you VPS when you run the ./setup script
+   Replace `<secret>` with your SSH secret key configured in the previous step.
+
+   This command will generate a `deploy.yml` file in your project, setting up the deployment workflow automatically.
+
+   With these steps, whenever you push to your repository's main branch, your app on the VPS will automatically update. This action requires a bash file to be present on the VPS, which is generated when you run the ./setup script. Everything is handled for you.
