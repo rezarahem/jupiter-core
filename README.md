@@ -182,9 +182,9 @@ This guide is written with the assumption that you're using the root user. If yo
 
    Now run the `setup.sh` to set up your VPS
 
-     ```bash
-     ./setup.sh
-     ```
+   ```bash
+   ./setup.sh
+   ```
 
    Usually, after this step, you won't need to do anything else. However, I personally ran into some issues with Docker that you probably won't experience. Docker imposes a pull request limit—even for first-time users. The limit is 100 pulls per six hours. If you exceed this, you'll need to wait before trying again.
 
@@ -211,58 +211,20 @@ This guide is written with the assumption that you're using the root user. If yo
 
    It might be hard to find a suitable DNS nameserver, but you can always get a clean IP for some extra cash. Also, make sure to contact your support team—they might have better solutions.
 
-## Setup CI/CD With Github Action
+5. **Deploayment**
 
-GitHub Actions is a powerful CI/CD tool integrated into GitHub, enabling automated workflows for building, testing, and deploying applications. CI (Continuous Integration) ensures code changes are tested and validated automatically, while CD (Continuous Deployment) handles automated deployments to environments like production. Workflows are defined in `YAML` files under `.github/workflows`, triggered by events like `push` or `pull_request`. A typical workflow involves steps for checking out code, setting up the environment, installing dependencies, running tests, building, and deploying. Sensitive data like API keys can be securely stored as GitHub Secrets. For example, a Next.js deployment workflow might install dependencies, build the app, and deploy to production. GitHub Actions offers flexibility, reusable actions, making it ideal for automating modern development pipelines.
+   First, you need to log in to your VPS if you aren't already logged in.
 
-When setting up SSH access between your VPS and GitHub, it's important to note that you only need one SSH key pair (a public key and a private key) for each VPS. This single key pair is sufficient to authenticate the VPS with your GitHub account and can be used for all repositories associated with that account.
-
-However, if you prefer more granular control, you can create and use a specific SSH key pair for a particular repository rather than for the entire GitHub account. This allows you to manage CI/CD processes for all repositories using one key pair or assign different keys for specific repositories as needed.
-
-In this guide, we use the latter approach of creating and using a specific SSH key pair for a particular repository.
-
-1. **Generate a SSH Key Pair**
-
-   It's a good practice to choose a meaningful name for this pair like `deploy`
+   Once you're logged in, you can start the deployment by running the deploy.sh script that you generated in the previous step:
 
    ```bash
-    ssh-keygen -t ed25519 -C "your_email@example.com" -f ".shh/deploy"
+   ./deploy.sh
    ```
 
-   Log the public key
+   This script will pull the source code from your GitHub repository and start building the production version of your Next.js app.
 
-   ```bash
-   cat ~/.ssh/deploy.pub
-   ```
+   To update your application, simply run the script again. It will pull the latest changes from the repository.
 
-   Copy the public key and go to your github.
+   Note: This script will only pull from the main branch of your repository.
 
-   On your github repo, go to settings and under `Deploy keys` add the new public key you generated.
-
-2. **Add Github Secret**
-
-   Now log the private key with this command.
-
-   ```bash
-   cat .ssh/deploy
-   ```
-
-   Copy it and go back to your repository settings page, under Secrets and Variables go to Actions and add the private key with `DEPLOY_SSH_KEY` as name or any name you want.
-
-3. **Add Github Action Workflow to the Source Code**
-
-   GitHub Actions is a powerful tool for automating tasks within your software development lifecycle. It enables you to define custom workflows for CI/CD (Continuous Integration/Continuous Deployment), automated testing, code quality checks, and other processes.
-
-   To make GitHub Actions work, you need to add `a workflow file` to your project. Workflow files are written in `YAML` and stored in the `.github/workflows/` directory at the root of your repository.
-
-   Here, we aim to automate the deployment process. To achieve this, I added a command to the Jupiter CLI called deploy-workflow. You can also use the shorthand alias dw to quickly add a deployment workflow action to your project.
-
-   ```bash
-   npx @rahem/jupiter dw <secret>
-   ```
-
-   Replace `<secret>` with your SSH secret key configured in the previous step.
-
-   This command will generate a `deploy.yml` file in your project, setting up the deployment workflow automatically.
-
-   With these steps, whenever you push to your repository's main branch, your app on the VPS will automatically update. This action requires a bash file to be present on the VPS, which is generated when you run the ./setup script. Everything is handled for you.
+   That's it! Your Next.js application is now ready at your domain 🚀.

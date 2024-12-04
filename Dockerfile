@@ -1,5 +1,5 @@
 # Stage 1: Use an official Node.js LTS 22 image as the base
-FROM node:22-slim AS base
+FROM node:22-alpine AS base
 
 # Stage 2: Install dependencies
 FROM base AS deps
