@@ -32,7 +32,6 @@ if ! sudo docker-compose ps | grep "Up"; then
 fi
 EOF
 
-
 # Mark scripts as executable
 chmod +x docker.sh
 chmod +x nginx.sh 

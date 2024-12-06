@@ -45,6 +45,13 @@ server {
     return 301 https://\$host\$request_uri;
 }
 
+upstream myapp {
+    # Apollo
+    server localhost:3000 max_fails=3 fail_timeout=10s; 
+    # Artemis
+    server localhost:3001 max_fails=3 fail_timeout=10s;
+}
+
 server {
     listen 443 ssl;
     server_name $DOMAIN_NAME;
@@ -58,7 +65,7 @@ server {
     limit_req zone=mylimit burst=20 nodelay;
 
     location / {
-        proxy_pass http://localhost:3000;
+        proxy_pass http://myapp;
         proxy_http_version 1.1;
         proxy_set_header Upgrade \$http_upgrade;
         proxy_set_header Connection 'upgrade';
