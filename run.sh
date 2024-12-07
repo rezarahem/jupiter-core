@@ -1,5 +1,3 @@
-
-
 #!/bin/bash
 
 # URL of the compressed archive
