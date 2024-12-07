@@ -85,7 +85,7 @@ chmod +x spinup.sh
 chmod +x refresh.sh
 chmod +x deploy.sh
 
-Run the scripts in sequence
+# Run the scripts in sequence
 ./docker.sh
 ./nginx.sh "$DOMAIN" "$EMAIL"
 
