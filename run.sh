@@ -1,6 +1,6 @@
 #!/bin/bash
 
-git clone --branch sh https://github.com/rezarahem/jupiter-core.git ~/setup
+git clone --branch sh https://github.com/rezarahem/jupiter-core.git ~/setup && cd ~/setup
 
 cd ~/setup
 
