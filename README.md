@@ -88,8 +88,9 @@ This guide is written with the assumption that you're using the root user. If yo
    - nginx.sh
    - spinup.sh
    - refresh.sh
+   - deploy.sh
 
-   Running `setup.sh` kick-starts the setup process. It will install `Docker` and `Nginx` on your VPS and generates `config.sh` and `deploy.sh` script for deployment.
+   Running setup.sh initiates the setup process. It will install Docker and Nginx on your VPS, and generate a config.sh file to manage container setup and future deployments.
 
    Now run the `setup.sh` to set up your VPS
 
