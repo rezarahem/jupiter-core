@@ -4,42 +4,101 @@
 rm -f run.sh
 
 # Prompt for variables
-read -p "Enter the domain name: " DOMAIN_NAME
+read -p "Enter your repo: " REPO
+read -p "Enter yout app name: " APP
+read -p "Enter the domain name: " DOMAIN
 read -p "Enter your email: " EMAIL
-read -p "Enter your repo: " REPO_URL
-read -p "Enter yout app name: " APP_DIR
 
-cat <<EOF > ~/deploy.sh
+# Generate the config.sh file
+cat > config.sh <<EOF
+# Configuration File
+REPO="$REPO"
+DIR="$APP"
+IMAGE="$APP"
+DOMAIN="$DOMAIN"
+EMAIL="$EMAIL"
+EOF
+
+echo "Generated config.sh with the provided configuration."
+
+# Generate the deploy.sh file
+cat > deploy.sh <<'EOF'
 #!/bin/bash
 
-# Clone the Git repository
-if [ -d "$APP_DIR" ]; then
-  echo "Directory $APP_DIR already exists. Pulling latest changes..."
-  cd "$APP_DIR" && git pull
-  sudo docker-compose down
-  sudo docker-compose up --build -d
+set -e
+
+# Load the configuration
+source config.sh
+
+LAST_IMAGE_ID=$(docker images --filter=reference="$IMAGE:latest" --format "{{.ID}}")
+
+echo "Building the Docker image..."
+docker build -t "$IMAGE" .
+
+if [ -n "$LAST_IMAGE_ID" ]; then
+  docker tag "$LAST_IMAGE_ID" "$IMAGE:backup"
+  echo "Backup image tagged as $IMAGE:backup"
 else
-  echo "Cloning repository from $REPO_URL..."
-  git clone "$REPO_URL" "$APP_DIR"
-  cd "$APP_DIR"
-  sudo docker-compose up --build -d
+  echo "No existing 'latest' image found, skipping backup."
 fi
 
-# Check if Docker Compose started correctly
-if ! sudo docker-compose ps | grep "Up"; then
-  echo "Docker containers failed to start. Check logs with 'docker-compose logs'."
-  exit 1
+# Check if any container is running on port 3000
+container_id_3000=$(docker ps --filter "publish=3000" --format "{{.ID}}")
+# Check if any container is running on port 3001
+container_id_3001=$(docker ps --filter "publish=3001" --format "{{.ID}}")
+
+# If no containers are found on both ports, spin up the image
+if [ -z "$container_id_3000" ] && [ -z "$container_id_3001" ]; then
+  echo "No active containers on ports 3000 and 3001. Spinning up the container..."
+  ~/spinup.sh $IMAGE
+else
+  # If there are active containers, call refresh with the container IDs
+  echo "Active containers found on ports 3000 and/or 3001. Refreshing..."
+  ~/refresh.sh $IMAGE $container_id_3000 $container_id_3001
 fi
 EOF
+
+
+echo "Generated deploy.sh script. You can now use ./deploy.sh to start the deployment process."
 
 # Mark scripts as executable
 chmod +x docker.sh
 chmod +x nginx.sh 
+chmod +x spinup.sh
+chmod +x refresh.sh
 chmod +x deploy.sh
 
 Run the scripts in sequence
 ./docker.sh
-./nginx.sh "$DOMAIN_NAME" "$EMAIL"
+./nginx.sh "$DOMAIN" "$EMAIL"
 
-# echo 'You\'re all set up! 👌'
+echo "You\'re all set up! 👌"
+
+
+
+
+# cat <<EOF > ~/deploy.sh
+# #!/bin/bash
+
+# set -e
+
+# # Clone the Git repository
+# if [ -d "$APP" ]; then
+#   echo "Directory $APP already exists. Pulling latest changes..."
+#   cd "$APP" && git pull
+#   sudo docker-compose down
+#   sudo docker-compose up --build -d
+# else
+#   echo "Cloning repository from $REPO..."
+#   git clone "$REPO" "$APP"
+#   cd "$APP"
+#   sudo docker-compose up --build -d
+# fi
+
+# # Check if Docker Compose started correctly
+# if ! sudo docker-compose ps | grep "Up"; then
+#   echo "Docker containers failed to start. Check logs with 'docker-compose logs'."
+#   exit 1
+# fi
+# EOF
 
