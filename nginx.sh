@@ -1,12 +1,17 @@
 #!/bin/bash
 
-DOMAIN_NAME=$1
-EMAIL=$2 
+set -e
 
+if [[ -f config.sh ]]; then
+  source config.sh
+else
+  echo "Error: config.sh file not found. Please run the setup script to generate it."
+  exit 1
+fi
 
-if [[ -z "$DOMAIN_NAME" || -z "$EMAIL" ]]; then
-  echo "Error: Missing domain or email."
-  echo "Usage: ./nginx.sh <domain_name> <email>"
+if [[ -z "$DOMAIN" || -z "$EMAIL" ]]; then
+  echo "Error: Missing required configuration values."
+  echo "Please ensure DOMAIN, and EMAIL are defined in config.sh."
   exit 1
 fi
 
@@ -22,7 +27,7 @@ sudo systemctl stop nginx
 
 # Obtain SSL certificate using Certbot standalone mode
 sudo apt install certbot -y
-sudo certbot certonly --standalone -d $DOMAIN_NAME --non-interactive --agree-tos -m $EMAIL
+sudo certbot certonly --standalone -d $DOMAIN --non-interactive --agree-tos -m $EMAIL
 
 # Ensure SSL files exist or generate them
 if [ ! -f /etc/letsencrypt/options-ssl-nginx.conf ]; then
@@ -39,7 +44,7 @@ limit_req_zone \$binary_remote_addr zone=mylimit:10m rate=10r/s;
 
 server {
     listen 80;
-    server_name $DOMAIN_NAME;
+    server_name $DOMAIN;
 
     # Redirect all HTTP requests to HTTPS
     return 301 https://\$host\$request_uri;
@@ -54,10 +59,10 @@ upstream myapp {
 
 server {
     listen 443 ssl;
-    server_name $DOMAIN_NAME;
+    server_name $DOMAIN;
 
-    ssl_certificate /etc/letsencrypt/live/$DOMAIN_NAME/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/$DOMAIN_NAME/privkey.pem;
+    ssl_certificate /etc/letsencrypt/live/$DOMAIN/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/$DOMAIN/privkey.pem;
     include /etc/letsencrypt/options-ssl-nginx.conf;
     ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
 

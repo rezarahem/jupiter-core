@@ -2,11 +2,20 @@
 
 set -e
 
-# [ -z "$IMAGE_NAME" ] && { echo "IMAGE_NAME is empty or not set."; exit 1; }
-if [ -z "$IMAGE_NAME" ]; then
-  echo "IMAGE_NAME is empty or not set."
+
+if [[ -f config.sh ]]; then
+  source config.sh
+else
+  echo "Error: config.sh file not found. Please run the setup script to generate it."
   exit 1
 fi
+
+if [[ -z "$IMAGE" ]]; then
+  echo "Error: Missing required configuration values."
+  echo "Please ensure IMAGE is defined in config.sh."
+  exit 1
+fi
+
 
 # Initialize variables to track health check results
 apollo_health=true
@@ -14,7 +23,7 @@ artemis_health=true
 
 
 # Get the image name from the argument
-# IMAGE_NAME=$1
+# IMAGE=$1
 
 check_health() {
   local port=$1
@@ -42,7 +51,7 @@ check_health() {
 }
 
 # Start Apollo container on port 3000
-sudo docker run --rm -d -p 3000:3000 --name apollo "$IMAGE_NAME:latest"
+sudo docker run --rm -d -p 3000:3000 --name apollo "$IMAGE:latest"
 
 sleep 5
 
@@ -55,7 +64,7 @@ else
 fi
 
 # Start Artemis container on port 3001
-sudo docker run --rm -d -p 3001:3000 --name artemis "$IMAGE_NAME:latest"
+sudo docker run --rm -d -p 3001:3000 --name artemis "$IMAGE:latest"
 
 sleep 5
 

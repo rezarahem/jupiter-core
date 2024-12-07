@@ -2,9 +2,21 @@
 
 set -e
 
-IMAGE_NAME=$1
-P3000=$2
-P3001=$3
+if [[ -f config.sh ]]; then
+  source config.sh
+else
+  echo "Error: config.sh file not found. Please run the setup script to generate it."
+  exit 1
+fi
+
+if [[ -z "$IMAGE" ]]; then
+  echo "Error: Missing required configuration values."
+  echo "Please ensure IMAGE is defined in config.sh."
+  exit 1
+fi
+
+P3000=$(docker ps --filter "publish=3000" --format "{{.ID}}")
+P3001=$(docker ps --filter "publish=3001" --format "{{.ID}}")
 
 check_health() {
   local port=$1
@@ -31,7 +43,6 @@ check_health() {
   fi
 }
 
-[ -z "$IMAGE_NAME" ] && { echo "IMAGE_NAME is empty or not set."; exit 1; }
 
 # Initialize variables to track health check results
 apollo_health=true
@@ -42,7 +53,7 @@ if [ -n "$P3000" ]; then
 
   sudo docker stop $P3000
 
-  sudo docker run --rm -d -p 3000:3000 --name apollo "$IMAGE_NAME:latest"
+  sudo docker run --rm -d -p 3000:3000 --name apollo "$IMAGE:latest"
 
   sleep 5
 
@@ -54,7 +65,7 @@ if [ -n "$P3000" ]; then
     echo "Rolling back Apollo (port 3000) to backup version..."
     container_id_3000=$(docker ps --filter "publish=3000" --format "{{.ID}}")
     sudo docker stop $container_id_3000
-    sudo docker run --rm -d -p 3000:3000 --name apollo "$IMAGE_NAME:backup"
+    sudo docker run --rm -d -p 3000:3000 --name apollo "$IMAGE:backup"
   fi
 fi
 
@@ -63,7 +74,7 @@ if [ -n "$P3001" ]; then
 
   sudo docker stop $P3001
 
-  sudo docker run --rm -d -p 3001:3000 --name artemis "$IMAGE_NAME:latest"
+  sudo docker run --rm -d -p 3001:3000 --name artemis "$IMAGE:latest"
 
   sleep 5
 
@@ -75,15 +86,15 @@ if [ -n "$P3001" ]; then
     echo "Rolling back Artemis (port 3001) to backup version..."
     container_id_3001=$(docker ps --filter "publish=3001" --format "{{.ID}}")
     sudo docker stop $container_id_3001
-    sudo docker run --rm -d -p 3001:3000 --name artemis "$IMAGE_NAME:backup"
+    sudo docker run --rm -d -p 3001:3000 --name artemis "$IMAGE:backup"
   fi
 fi
 
 
 # Remove the image if both health checks failed
 if [ "$apollo_health" = false ] && [ "$artemis_health" = false ]; then
-  echo "Both containers failed health check. Removing the latest image: $IMAGE_NAME"
-  sudo docker rmi "$IMAGE_NAME:latest"
+  echo "Both containers failed health check. Removing the latest image: $IMAGE"
+  sudo docker rmi "$IMAGE:latest"
   exit 1
 fi
 
