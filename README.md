@@ -89,13 +89,22 @@ This guide is written with the assumption that you're using the root user. If yo
    - spinup.sh
    - refresh.sh
 
-   Running `setup.sh` kick-starts the setup process. It will install `Docker` and `Nginx` on your VPS and generate a `deploy.sh` script for deployment.
+   Running `setup.sh` kick-starts the setup process. It will install `Docker` and `Nginx` on your VPS and generates `config.sh` and `deploy.sh` script for deployment.
 
    Now run the `setup.sh` to set up your VPS
 
    ```bash
    ./setup.sh
    ```
+
+   Immediately after running ./setup, several inputs will appear in the terminal. These are basic variables required for setting up your VPS:
+
+   - Enter your repo's SSH URL: <YOUR_REPO_SSH>
+   - Enter your app name: <YOUR_APP_NAME>
+   - Enter the domain name: <YOUR_DOMAIN>
+   - Enter your email: <YOUR_EMAIL>
+
+   **Solving Docker Pull Limit Issues with DNS Server Configuration**
 
    Usually, after this step, you won't need to do anything else. However, I personally ran into some issues with Docker that you probably won't experience. Docker imposes a pull request limit—even for all users. The limit is 100 pulls per six hours. If you exceed this, you'll need to wait before trying again.
 
