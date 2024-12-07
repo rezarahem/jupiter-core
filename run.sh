@@ -1,14 +1,15 @@
 #!/bin/bash
-url="https://raw.githubusercontent.com/rezarahem/jupiter-core/refs/heads/sh/scripts.tar"
 
-echo -n "Downloading scripts archive ..."
+git clone --branch sh https://github.com/rezarahem/jupiter-core.git ~/setup
 
-curl -s -o ~/scripts.tar "$url" && echo -e "\r$(printf ' %.0s' {1..50})\r✔  Downloaded scripts.tar"
-
-tar -xzf ~/scripts.tar -C ~ && echo "✔  Extracted scripts."
+cd ~/setup
 
 chmod +x ~/setup.sh && echo "✔  Made setup.sh executable"
 
-rm ~/scripts.tar && echo "✔  Removed the archive"
+rm run.sh
 
 echo "🙌 Done!"
+
+
+
+
