@@ -89,7 +89,7 @@ chmod +x deploy.sh
 ./docker.sh
 ./nginx.sh "$DOMAIN" "$EMAIL"
 
-echo "You\'re all set up! 👌"
+echo "You're all set up! 👌"
 
 
 
