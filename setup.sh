@@ -6,8 +6,8 @@ set -e
 rm -f run.sh
 
 # Prompt for variables
-read -p "Enter your repo: " REPO
-read -p "Enter yout app name: " APP
+read -p "Enter your repo's SSH URL: " REPO
+read -p "Enter your app name: " APP
 read -p "Enter the domain name: " DOMAIN
 read -p "Enter your email: " EMAIL
 
