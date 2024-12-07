@@ -1,6 +1,5 @@
 #!/bin/bash
-
-url="https://raw.githubusercontent.com/rezarahem/jupiter-core/refs/heads/sh/scripts.tar.gz"
+url="https://raw.githubusercontent.com/rezarahem/jupiter-core/refs/heads/sh/scripts.tar"
 
 echo -n "Downloading scripts archive ..."
 
