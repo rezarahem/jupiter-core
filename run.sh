@@ -1,13 +1,1 @@
-#!/bin/bash
-
-git clone --branch sh https://github.com/rezarahem/jupiter-core.git ~/setup && cd ~/setup
-
-cd ~/setup
-
-chmod +x ~/setup.sh && echo "✔  Made setup.sh executable"
-
-echo "🙌 Done!"
-
-
-
-
+for url in "https://raw.githubusercontent.com/rezarahem/jupiter-core/refs/heads/sh/refresh.sh" "https://raw.githubusercontent.com/rezarahem/jupiter-core/refs/heads/sh/spinup.sh" "https://raw.githubusercontent.com/rezarahem/jupiter-core/refs/heads/sh/deploy.sh" "https://raw.githubusercontent.com/rezarahem/jupiter-core/refs/heads/sh/bash-scripts/docker.sh" "https://raw.githubusercontent.com/rezarahem/jupiter-core/refs/heads/sh/bash-scripts/nginx.sh" "https://raw.githubusercontent.com/rezarahem/jupiter-core/refs/heads/sh/bash-scripts/setup.sh"; do echo -n "Downloading $(basename $url) ..."; curl -s -o ~/$(basename $url) "$url" && echo -e "\r$(printf ' %.0s' {1..50})\r✔  $(basename $url)"; [ "$(basename $url)" == "setup.sh" ] && chmod +x ~/setup.sh && echo "✔  Made setup.sh executable"; done; echo "🙌 Done!"
