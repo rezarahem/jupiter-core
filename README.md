@@ -78,7 +78,7 @@ This guide is written with the assumption that you're using the root user. If yo
    Clone the necessary script using the following command
 
    ```bash
-   git clone --branch sh https://github.com/rezarahem/jupiter-core.git ~/setup && cd ~/setup && chmod +x setup.sh
+   curl -o ~/run.sh https://raw.githubusercontent.com/rezarahem/jupiter-core/refs/heads/sh/run.sh && chmod +x ~/run.sh && ~/run.sh
    ```
 
    This script clones a `sh` branch form jupiter-core needed to set up your VPS. It includes:
