@@ -19,11 +19,11 @@ The rest of this document guides you through setting up a Jupiter project, from 
 
 ## Setup the VPS
 
-I'm using a VPS with Ubuntu 24.04, and I recommend renting a similar setup. However, I firmly believe the configurations we'll be setting up should also work with Ubuntu 20 and 22, though I haven't personally tested those versions.
+I'm using a VPS with Ubuntu 24.04, and I recommend renting a similar setup. However, this setup should work with Ubuntu 20 and 22, though I haven't personally tested those versions.
 
 This guide is written with the assumption that you're using the root user. If you're working with a non-root user, ensure the appropriate permissions are granted.
 
-1. **Login to your VPS with root user**
+1. **Login to your VPS as root user**
 
    ```bash
    ssh root@your_vps_ip
@@ -86,6 +86,8 @@ This guide is written with the assumption that you're using the root user. If yo
    - setup.sh
    - docker.sh
    - nginx.sh
+   - spinup.sh
+   - refresh.sh
 
    Running `setup.sh` kick-starts the setup process. It will install `Docker` and `Nginx` on your VPS and generate a `deploy.sh` script for deployment.
 
@@ -95,7 +97,7 @@ This guide is written with the assumption that you're using the root user. If yo
    ./setup.sh
    ```
 
-   Usually, after this step, you won't need to do anything else. However, I personally ran into some issues with Docker that you probably won't experience. Docker imposes a pull request limit—even for first-time users. The limit is 100 pulls per six hours. If you exceed this, you'll need to wait before trying again.
+   Usually, after this step, you won't need to do anything else. However, I personally ran into some issues with Docker that you probably won't experience. Docker imposes a pull request limit—even for all users. The limit is 100 pulls per six hours. If you exceed this, you'll need to wait before trying again.
 
    You can log in to your Docker account to increase the limit to 200 pulls, but I couldn't even log in. Every attempt resulted in a 429 Too Many Requests error, indicating I had made too many requests.
 
@@ -118,13 +120,11 @@ This guide is written with the assumption that you're using the root user. If yo
    nameserver 0.0.0.0
    ```
 
-   It might be hard to find a suitable DNS nameserver, but you can always get a clean IP for some extra cash. Also, make sure to contact your support team—they might have better solutions.
+   It might be hard to find a suitable DNS nameserver, but you can always get a clean IP for some extra cash. Also, make sure to contact your support team, they might have better solutions.
 
 5. **Deploayment**
 
-   First, you need to log in to your VPS if you aren't already logged in.
-
-   Once you're logged in, you can start the deployment by running the deploy.sh script that you generated in the previous step:
+   You can start the deployment by running the deploy.sh script that you generated in the previous step:
 
    ```bash
    ./deploy.sh
@@ -137,10 +137,3 @@ This guide is written with the assumption that you're using the root user. If yo
    Note: This script will only pull from the main branch of your repository.
 
    That's it! Your Next.js application is now ready at your domain 🚀.
-   
-   
-   
-
-
-
-
