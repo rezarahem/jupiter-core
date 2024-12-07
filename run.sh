@@ -6,8 +6,6 @@ cd ~/setup
 
 chmod +x ~/setup.sh && echo "✔  Made setup.sh executable"
 
-rm run.sh
-
 echo "🙌 Done!"
 
 
