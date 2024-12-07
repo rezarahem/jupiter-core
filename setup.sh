@@ -14,6 +14,7 @@ read -p "Enter your email: " EMAIL
 # Generate the config.sh file
 cat > config.sh <<EOF
 # Configuration File
+
 REPO="$REPO"
 DIR="$APP"
 IMAGE="$APP"
