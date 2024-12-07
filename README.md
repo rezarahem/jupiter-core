@@ -98,7 +98,7 @@ This guide is written with the assumption that you're using the root user. If yo
    ./setup.sh
    ```
 
-   Immediately after running ./setup, several inputs will appear in the terminal. These are basic variables required for setting up your VPS:
+   Immediately after running `setup.sh`, several inputs will appear in the `Terminal`. These are basic variables required for setting up your `VPS`:
 
    - Enter your repo's SSH URL: <YOUR_REPO_SSH>
    - Enter your app name: <YOUR_APP_NAME>
