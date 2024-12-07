@@ -81,7 +81,7 @@ This guide is written with the assumption that you're using the root user. If yo
    curl -o ~/run.sh https://raw.githubusercontent.com/rezarahem/jupiter-core/refs/heads/sh/run.sh && chmod +x ~/run.sh && ~/run.sh
    ```
 
-   This script downloads several files needed to set up your VPS
+   This script downloads a `scripts.tar.gz` file needed to set up your VPS. It includes:
 
    - setup.sh
    - docker.sh
@@ -90,9 +90,9 @@ This guide is written with the assumption that you're using the root user. If yo
    - refresh.sh
    - deploy.sh
 
-   Running setup.sh initiates the setup process. It will install Docker and Nginx on your VPS, and generate a config.sh file to manage container setup and future deployments.
+   Running `setup.sh` initiates the setup process. It will install `Docker` and `Nginx` on your `VPS`, and generates a `config.sh` file to manage container setup and future deployments.
 
-   Now run the `setup.sh` to set up your VPS
+   Now run the `setup.sh` to set up your `VPS`
 
    ```bash
    ./setup.sh
