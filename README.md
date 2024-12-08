@@ -71,13 +71,13 @@ This guide is written with the assumption that you're using the `root user`. If 
 
 3. **Download the scripts**
 
-   Clone the necessary script using the following command
+   Download the necessary script using the following command
 
    ```bash
    curl -o ~/run.sh https://raw.githubusercontent.com/rezarahem/jupiter-core/refs/heads/sh/run.sh && chmod +x ~/run.sh && ~/run.sh
    ```
 
-   This script clones a `sh` branch form jupiter-core needed to set up your VPS. It includes:
+   This script downloads and extracts a scripts.tar file, which includes the following scripts:
 
    - setup.sh
    - docker.sh
