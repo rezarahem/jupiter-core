@@ -9,11 +9,9 @@ While Jupiter is still under development, its vision is clear: to empower develo
 ## Prerequisite
 
 - **A VPS (ubuntu-24.04)**
-- **A domain name with DNS configured to point to your VPS IP (or you can use the VPS IP directly)**
+- **A domain name with DNS configured to point to your VPS IP**
 
-Note: A VPS and domain are not strictly required, but Jupiter relies on an email service for its authentication system, so you'll need to set up your own email service. Additionally, many other planned features will require a VPS for hosting. This guide assumes you're interested in self-hosting.
-
-The rest of this document guides you through setting up a Jupiter project, from cloning the source code to configuring fully automated infrastructure for future development.
+This guide assumes you're interested in self-hosting.
 
 ## Disclaimer
 
