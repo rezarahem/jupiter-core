@@ -1,8 +1,8 @@
-#!/bin/bash
+# !/bin/bash
 
 set -e
 
-
+# Load configuration file
 if [[ -f config.sh ]]; then
   source config.sh
 else
@@ -10,27 +10,23 @@ else
   exit 1
 fi
 
-if [[ -z "$IMAGE" ]]; then
+# Check for required configuration values
+if [[ -z "$IMAGE" || -z "$NET" ]]; then
   echo "Error: Missing required configuration values."
-  echo "Please ensure IMAGE is defined in config.sh."
+  echo "Please ensure IMAGE and NET are defined in config.sh."
   exit 1
 fi
 
+# Initialize health flags
+declare -A health_flags
+health_flags["apollo"]=true
+health_flags["artemis"]=true
 
-# Initialize variables to track health check results
-apollo_health=true
-artemis_health=true
-
-
-# Get the image name from the argument
-# IMAGE=$1
-
+# Function to perform health check on container
 check_health() {
   local port=$1
   local nickname=$2
   local health_check_url="http://localhost:$port/api/health"
-
-  # Get the container ID based on port mapping
   local container_id=$(sudo docker ps --filter "publish=$port" --format "{{.ID}}")
 
   if [ -z "$container_id" ]; then
@@ -40,7 +36,6 @@ check_health() {
 
   echo "Checking health of container ($nickname) on port $port..."
 
-  # Perform the health check using curl
   if curl --silent --fail "$health_check_url" > /dev/null; then
     echo "Container ($nickname) on port $port is healthy!"
     return 0
@@ -50,37 +45,33 @@ check_health() {
   fi
 }
 
-# Start Apollo container on port 3000
-sudo docker run --rm -d -p 3000:3000 --name apollo "$IMAGE:latest"
+# Function to start a container and check health
+start_and_check_container() {
+  local port=$1
+  local nickname=$2
 
-sleep 5
+  sudo docker run --rm -d -p "$port:$port" --network "$NET" --name "$nickname" "$IMAGE:latest"
+  sleep 5
 
-# Run health check for Apollo
-if check_health 3000 "Apollo"; then
-  echo "Apollo (port 3000) succeeded."
-else
-  apollo_health=false
-  echo "Apollo (port 3000) failed."
-fi
+  if ! check_health "$port" "$nickname"; then
+    health_flags["$nickname"]=false
+    echo "$nickname (port $port) failed."
+  else
+    echo "$nickname (port $port) succeeded."
+  fi
+}
 
-# Start Artemis container on port 3001
-sudo docker run --rm -d -p 3001:3000 --name artemis "$IMAGE:latest"
+# Start and check Apollo
+start_and_check_container 3000 "apollo"
 
-sleep 5
+# Start and check Artemis
+start_and_check_container 3001 "artemis"
 
-
-# Run health check for Artemis
-if check_health 3001 "Artemis"; then
-  echo "Artemis (port 3001) succeeded."
-else
-  artemis_health=false
-  echo "Artemis (port 3001) failed."
-fi
-
-if [ "$apollo_health" = false ] && [ "$artemis_health" = false ]; then
+# Final check for success
+if [ "${health_flags["apollo"]}" = false ] && [ "${health_flags["artemis"]}" = false ]; then
   echo "Both containers failed health check."
-  exit 1 
+  exit 1
 fi
-
 
 echo "Successful Deployment"
+

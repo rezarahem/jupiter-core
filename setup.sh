@@ -18,6 +18,7 @@ cat > config.sh <<EOF
 REPO="$REPO"
 DIR="$APP"
 IMAGE="$APP"
+NET="$APP"
 DOMAIN="$DOMAIN"
 EMAIL="$EMAIL"
 EOF
@@ -34,6 +35,15 @@ chmod +x deploy.sh
 # Run the scripts in sequence
 ./docker.sh
 ./nginx.sh
+
+# Check if the Docker network already exists
+if ! docker network inspect $APP > /dev/null 2>&1; then
+  docker network create $APP
+  echo "Docker network $APP created."
+else
+  echo "Docker network $APP already exists."
+fi
+
 
 echo "You're all set up! 👌"
 
