@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 URL="https://raw.githubusercontent.com/rezarahem/jupiter-core/refs/heads/sh/scripts.tar.gz"
 FILE="scripts.tar.gz"
 
