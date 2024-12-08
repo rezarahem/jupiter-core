@@ -1,0 +1,26 @@
+FROM postgres:17.2-alpine
+
+# Optionally add custom initialization scripts or files
+# COPY init.sql /docker-entrypoint-initdb.d/
+
+# Set environment variables (optional, can also be set during `docker run`)
+ENV POSTGRES_USER=ju
+ENV POSTGRES_PASSWORD=ju
+ENV POSTGRES_DB=ju
+
+# docker build -t myorg/postgres:latest -f docker/Dockerfile.postgres .
+
+# docker pull postgres:17.2-alpine
+
+
+# docker run -d \
+#   --name postdb \
+#   --network ju_net \
+#   -e POSTGRES_USER=ju \
+#   -e POSTGRES_PASSWORD=ju \
+#   -e POSTGRES_DB=ju \
+#   -p 5432:5432 \
+#   myorg/postgres:latest
+
+# docker network create ju_net
+# docker network ls
