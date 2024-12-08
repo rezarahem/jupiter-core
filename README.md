@@ -25,7 +25,7 @@ This guide is written with the assumption that you're using the `root user`. If 
 
 1. **Login and Updates**
 
-   First, log in to your VPS. Some VPS providers provide an SSH key for login, while others provide a password. If you have an SSH key, that's great. However, if you don't have one, I strongly recommend using SSH instead of a password for better security. It's also advisable to disable password-based login entirely for enhanced security.
+   First, log in to your VPS. Some VPS providers offer an SSH key for login, while others provide a password. If you have an SSH key, that's great. However, if you don't have one, I strongly recommend using SSH instead of a password for better security. It's also advisable to disable password-based login entirely for enhanced security.
 
    ```bash
    ssh root@your_vps_ip
