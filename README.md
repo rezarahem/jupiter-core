@@ -39,6 +39,32 @@ This guide is written with the assumption that you're using the root user. If yo
    
    Connecting your VPS to your GitHub account through SSH provides several benefits, particularly for secure and efficient collaboration. SSH keys eliminate the need to repeatedly enter your GitHub credentials, streamlining tasks like cloning, pulling, and pushing code. This approach is more secure than using HTTPS with passwords, as the private key remains on the VPS and cannot be easily compromised. Additionally, automating tasks like deployments, backups, or CI/CD pipelines becomes seamless, as the VPS can interact with repositories without manual intervention. This secure, credential-free access ensures a smoother and more reliable workflow for managing your code and projects.
 
+   It is necessary to connect your VPS to your GitHub account to proceed with this guide.
+
+   First, you need to generate a `SSH key` on your VPS.
+
+    ```bash
+   ssh-keygen -t ed25519 -C "your_email@example.com"
+   ```
+
+   This will generate a public/private key pair in the `.ssh` folder.
+
+   **NOTE** The public key typically has a `.pub` extension and can be safely shared. However, under no circumstances should you ever expose your private key.
+
+   [Use this link for more on SSH keys](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
+
+   Log the public key
+
+   ```bash
+   cat ~/.ssh/ed25519.pub
+   ```
+
+   Copy the public key and go to your github.
+
+   On your github repo, go to settings and under `Deploy keys` add the new public key you generated.
+
+   Once the public key is added to your GitHub repository under the `Deploy keys` section, your VPS will be able to securely authenticate with GitHub using SSH. This step ensures that your VPS can access your repositories without needing to input credentials every time. You can now perform Git operations like cloning, pulling, and pushing code directly from your VPS with enhanced security and convenience. This setup also simplifies automating processes such as continuous deployment or server-side code updates, streamlining your workflow and increasing efficiency in your development pipeline.
+
 4. **Download the scripts**
 
    Clone the necessary script using the following command
