@@ -21,21 +21,25 @@ This is a work-in-progress document. I'm testing and writing as I go, so there's
 
 I'm using a VPS with Ubuntu 24.04, and I recommend renting a similar setup. However, this setup should work with Ubuntu 20 and 22, though I haven't personally tested those versions.
 
-This guide is written with the assumption that you're using the root user. If you're working with a non-root user, ensure the appropriate permissions are granted.
+This guide is written with the assumption that you're using the `root user`. If you're working with a non-root user, ensure the appropriate permissions are granted.
 
-1. **Login to your VPS as root user**
+1. **Login and Updates**
+
+   First, log in to your VPS. Some VPS providers provide an SSH key for login, while others provide a password. If you have an SSH key, that's great. However, if you don't have one, I strongly recommend using SSH instead of a password for better security. It's also advisable to disable password-based login entirely for enhanced security.
 
    ```bash
    ssh root@your_vps_ip
    ```
 
-2. **Update the packages**
+   Then, update your Linux system by running the following command
 
    ```bash
    sudo apt update && sudo apt upgrade -y
    ```
 
-3. **Streamlining GitHub Collaboration with SSH on Your VPS**
+   Once your system is updated, you can begin configuring your VPS. It's important to regularly update and secure your system to ensure optimal performance and protect against potential vulnerabilities.
+
+2. **Streamlining GitHub Collaboration with SSH on Your VPS**
    
    Connecting your VPS to your GitHub account through SSH provides several benefits, particularly for secure and efficient collaboration. SSH keys eliminate the need to repeatedly enter your GitHub credentials, streamlining tasks like cloning, pulling, and pushing code. This approach is more secure than using HTTPS with passwords, as the private key remains on the VPS and cannot be easily compromised. Additionally, automating tasks like deployments, backups, or CI/CD pipelines becomes seamless, as the VPS can interact with repositories without manual intervention. This secure, credential-free access ensures a smoother and more reliable workflow for managing your code and projects.
 
@@ -65,7 +69,7 @@ This guide is written with the assumption that you're using the root user. If yo
 
    Once the public key is added to your GitHub repository under the `Deploy keys` section, your VPS will be able to securely authenticate with GitHub using SSH. This step ensures that your VPS can access your repositories without needing to input credentials every time. You can now perform Git operations like cloning, pulling, and pushing code directly from your VPS with enhanced security and convenience. This setup also simplifies automating processes such as continuous deployment or server-side code updates, streamlining your workflow and increasing efficiency in your development pipeline.
 
-4. **Download the scripts**
+3. **Download the scripts**
 
    Clone the necessary script using the following command
 
@@ -124,7 +128,7 @@ This guide is written with the assumption that you're using the root user. If yo
 
    It might be hard to find a suitable DNS nameserver, but you can always get a clean IP for some extra cash. Also, make sure to contact your support team, they might have better solutions.
 
-5. **Deploayment**
+4. **Deploayment**
 
    You can start the deployment by running the `deploy.sh` script that you generated in the previous step:
 
