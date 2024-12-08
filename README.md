@@ -17,7 +17,6 @@ This guide assumes you're interested in self-hosting.
 
 This is a work-in-progress document. I'm testing and writing as I go, so there's a good chance you might encounter conflicts or inaccuracies. Please be patient—I'll ensure everything is properly finalized soon!
 
-
 ## Setup the VPS
 
 I'm using a VPS with Ubuntu 24.04, and I recommend renting a similar setup. However, this setup should work with Ubuntu 20 and 22, though I haven't personally tested those versions.
