@@ -1,12 +1,10 @@
 services:
   web:
     build: .
-    ports:
-      - '3000:3000'
     networks:
-      - my_network
+      - ju_net
 
 networks:
-  my_network:
-    name: my_network
+  ju_net:
+    name: ju_net
     driver: bridge

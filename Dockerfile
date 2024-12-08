@@ -1,30 +1,30 @@
-# Stage 1: Use an official Node.js LTS 22 image as the base
-FROM node:22-alpine AS base
+#1
+FROM node:22-alpine AS base 
+WORKDIR /prod
+RUN apk add --no-cache curl
 
-# Stage 2: Install dependencies
-FROM base AS deps
-WORKDIR /app
+#2
+FROM base AS build 
+ENV NODE_ENV=build
+ENV NEXT_PUBLIC_APP=Earth
 COPY package.json package-lock.json ./
-RUN npm ci
-
-# Stage 3: Build the application
-FROM base AS build
-WORKDIR /app
-COPY --from=deps /app/node_modules ./node_modules
+RUN npm ci --verbose 
 COPY . .
+RUN npm run build
 
-ENV NODE_ENV=production
-RUN npm run build 
+# Remove dev dependencies
+RUN npm prune --production --verbose
 
-# Stage 4: Production server
+#3
 FROM base AS prod
-WORKDIR /app
 ENV NODE_ENV=production
-
-COPY --from=build /app/public ./public
-COPY --from=build /app/.next/standalone ./
-COPY --from=build /app/.next/static ./.next/static
+ENV NEXT_PUBLIC_APP=Earth
+COPY --from=build /prod/public ./public
+COPY --from=build /prod/.next/standalone ./
+COPY --from=build /prod/.next/static ./.next/static
 
 EXPOSE 3000
 
 CMD ["node", "server.js"]
+
+

@@ -1,13 +1,7 @@
 import type { Metadata } from 'next';
-import localFont from 'next/font/local';
 import './globals.css';
 import { ThemeProvider } from '@/providers/theme-provider';
 
-const vazir = localFont({
-  src: '../fonts/vazirmatn-vf.ttf',
-  variable: '--font-vazir',
-  weight: '100 900',
-});
 
 export const metadata: Metadata = {
   title: `${process.env.NEXT_PUBLIC_APP}`,
@@ -20,8 +14,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html dir='rtl' lang='fa' suppressHydrationWarning>
-      <body className={vazir.className}>
+    <html suppressHydrationWarning>
+      <body>
         <ThemeProvider
           attribute='class'
           defaultTheme='system'
