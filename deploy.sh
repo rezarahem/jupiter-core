@@ -49,9 +49,11 @@ container_id_3001=$(docker ps --filter "publish=3001" --format "{{.ID}}")
 # If no containers are found on both ports, spin up the image
 if [ -z "$container_id_3000" ] && [ -z "$container_id_3001" ]; then
   echo "No active containers on ports 3000 and 3001. Spinning up the containers..."
+  cd ~
   ~/spinup.sh
 else
   # If there are active containers, start refreshing the containers... 
   echo "Active containers found on ports 3000 and/or 3001. Refreshing..."
+  cd ~
   ~/refresh.sh 
 fi
