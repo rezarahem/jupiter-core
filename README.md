@@ -129,7 +129,7 @@ This guide is written with the assumption that you're using the root user. If yo
 
 5. **Deploayment**
 
-   You can start the deployment by running the deploy.sh script that you generated in the previous step:
+   You can start the deployment by running the `deploy.sh` script that you generated in the previous step:
 
    ```bash
    ./deploy.sh
