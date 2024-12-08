@@ -35,43 +35,9 @@ This guide is written with the assumption that you're using the root user. If yo
    sudo apt update && sudo apt upgrade -y
    ```
 
-3. **Login with SSH key (Optional)**
-
-   First, you need to generate a `SSH key`.
-
-   **NOTE** You should generate your public/private SSH key pair on your local machine
-
-   ```bash
-   ssh-keygen -t ed25519 -C "your_email@example.com"
-   ```
-
-   **NOTE** Consider the public key has a `.pub` extension. You can safely share this key, but never ever expose your private key.
-
-   Log your SSH public key with this command, then get a copy of it.
-
-   ```bash
-   cat /path/to/you/public/id_ed25519.pub
-   ```
-
-   [Use this link for more on SSH keys](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
-
-   Make a directory called .ssh in your VPS
-
-   ```bash
-   mkdir ~/ .ssh
-   ```
-
-   Make a file in this directory called `authorized_keys`
-
-   ```bash
-   nano ~/.ssh/authorized_keys
-   ```
-
-   This command opens a file called `authorized_keys` in a text editor.
-
-   Add the public SSH key to `authorized_keys` using the nano text editor. Then save the file with `ctrl+x` followed by `Y` and finally `enter`.
-
-   Now your SSH key is ready. next time you log in, you won't need to enter your password.
+3. **Streamlining GitHub Collaboration with SSH on Your VPS**
+   
+   Connecting your VPS to your GitHub account through SSH provides several benefits, particularly for secure and efficient collaboration. SSH keys eliminate the need to repeatedly enter your GitHub credentials, streamlining tasks like cloning, pulling, and pushing code. This approach is more secure than using HTTPS with passwords, as the private key remains on the VPS and cannot be easily compromised. Additionally, automating tasks like deployments, backups, or CI/CD pipelines becomes seamless, as the VPS can interact with repositories without manual intervention. This secure, credential-free access ensures a smoother and more reliable workflow for managing your code and projects.
 
 4. **Download the scripts**
 
