@@ -19,6 +19,15 @@ fi
 
 echo "Starting deployment for $IMAGE from repository $REPO into directory $DIR..."
 
+# Clone or Pull Latest Changes
+if [ -d "$DIR" ]; then
+  echo "Directory $DIR already exists. Pulling latest changes..."
+  cd "$DIR" && git pull
+else
+  echo "Cloning repository from $REPO..."
+  git clone "$REPO" "$DIR"
+  cd "$DIR"
+fi
 
 LAST_IMAGE_ID=$(docker images --filter=reference="$IMAGE:latest" --format "{{.ID}}")
 

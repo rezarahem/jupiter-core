@@ -1,1 +1,1 @@
-$ scp -P username@ip:~/scripts.tar.gz ~/Downloads/scripts.tar.gz
+ scp -P username@ip:~/scripts.tar.gz ~/Downloads/scripts.tar.gz
