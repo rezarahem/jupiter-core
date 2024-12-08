@@ -29,5 +29,5 @@ fi
 
 chmod +x ~/setup.sh
 
-echo "🙌 Done!"
+# echo "🙌 Done!"
 
