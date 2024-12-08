@@ -1,8 +1,25 @@
 services:
-  web:
-    build: .
+  nextjs:
+    build: 
+      context: .
+      dockerfile: docker/Dockerfile.nextjs
     networks:
       - ju_net
+
+  postgres:
+    image: 17.2-alpine
+    container_name: postdb
+    environment:
+      POSTGRES_USER: ju
+      POSTGRES_PASSWORD: ju
+      POSTGRES_DB: ju
+    ports:
+      - '5432:5432'
+    volumes:
+      - db_volume:/var/lib/postgresql/data
+      
+volumes:
+  db_volume:
 
 networks:
   ju_net:
