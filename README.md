@@ -77,7 +77,7 @@ This guide is written with the assumption that you're using the `root user`. If 
    curl -o ~/run.sh https://raw.githubusercontent.com/rezarahem/jupiter-core/refs/heads/sh/run.sh && chmod +x ~/run.sh && ~/run.sh
    ```
 
-   This script downloads and extracts a scripts.tar file, which includes the following scripts:
+   This script downloads and extracts a `scripts.tar` file, which includes the following scripts:
 
    - setup.sh
    - docker.sh
@@ -130,7 +130,7 @@ This guide is written with the assumption that you're using the `root user`. If 
 
 4. **Deploayment**
 
-   You can start the deployment by running the `deploy.sh` script that you generated in the previous step:
+   You can start the deployment by running the `deploy.sh` script that you downloaded in the previous step:
 
    ```bash
    ./deploy.sh
