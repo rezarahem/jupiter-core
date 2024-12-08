@@ -6,12 +6,15 @@ Jupiter doesn't just focus on development—it also aims to simplify and automat
 
 While Jupiter is still under development, its vision is clear: to empower developers with an efficient, scalable, and self-hosting-friendly way to build, deploy, and manage web applications. Stay tuned as we continue to enhance its capabilities!
 
-**Disclaimer** This is a work-in-progress document. I'm testing and writing as I go, so there's a good chance you might encounter conflicts or inaccuracies. Please be patient—I'll ensure everything is properly finalized soon!
-
 ## Prerequisite
 
 - **A VPS (ubuntu-24.04)**
 - **A domain name with DNS configured to point to your VPS IP (or you can use the VPS IP directly)**
+
+## Disclaimer
+
+This is a work-in-progress document. I'm testing and writing as I go, so there's a good chance you might encounter conflicts or inaccuracies. Please be patient—I'll ensure everything is properly finalized soon!
+
 
 Note: A VPS and domain are not strictly required, but Jupiter relies on an email service for its authentication system, so you'll need to set up your own email service. Additionally, many other planned features will require a VPS for hosting. This guide assumes you're interested in self-hosting.
 
