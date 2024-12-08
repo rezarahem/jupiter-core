@@ -25,7 +25,9 @@ This guide is written with the assumption that you're using the `root user`. If 
 
 1. **Login and Updates**
 
-   First, log in to your VPS. Some VPS providers offer an SSH key for login, while others provide a password. If you have an SSH key, that's great. However, if you don't have one, I strongly recommend using SSH instead of a password for better security. It's also advisable to disable password-based login entirely for enhanced security.
+   To begin, log in to your VPS. Some VPS providers offer an SSH key for login, while others provide a password. If you already have an SSH key, that's excellent. If not, I strongly recommend setting up SSH key-based authentication instead of using a password, as it offers better security. Additionally, for enhanced protection, it's a good practice to disable password-based login entirely.
+
+   [Use this link for more on SSH keys](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
 
    ```bash
    ssh root@your_vps_ip
@@ -54,8 +56,6 @@ This guide is written with the assumption that you're using the `root user`. If 
    This will generate a public/private key pair in the `.ssh` folder.
 
    **NOTE** The public key typically has a `.pub` extension and can be safely shared. However, under no circumstances should you ever expose your private key.
-
-   [Use this link for more on SSH keys](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
 
    Log the public key
 
